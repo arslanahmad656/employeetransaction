@@ -19,7 +19,30 @@ namespace EmployeeTransaction.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return RedirectToAction("EmployeeList");
+            //return RedirectToAction("EmployeeList");
+            return RedirectToAction("EditCompany");
+        }
+
+        public ActionResult EditCompany()
+        {
+            ViewBag.Role = "Admin"; // Since it's in admin controller, it's always the admin role
+            return View(db.Companies.First());
+        }
+
+        [HttpPost]
+        public ActionResult EditCompany(Company model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill in the fields properly");
+                return View(model);
+            }
         }
 
         public ActionResult EmployeeList()

@@ -80,8 +80,8 @@ namespace EmployeeTransaction.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, change to shouldLockout: true
-                var userName = context.Users.Where(u => u.Email.Equals(model.Email, StringComparison.OrdinalIgnoreCase)).Single().UserName;
-                result = await SignInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, shouldLockout: false);
+                //var userName = context.Users.Where(u => u.Email.Equals(model.Email, StringComparison.OrdinalIgnoreCase)).Single().UserName;
+                result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             }
             catch
             {

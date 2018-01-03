@@ -1,10 +1,11 @@
 ﻿@model EmployeeTransaction.Models.Company
 
 @{
-    ViewBag.Title = "EditCompany";
+    ViewBag.Title = "Edit Company";
 }
 
 <h2>Edit Company</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -74,10 +75,9 @@
     <input type="submit" value="Save" class="btn btn-default" />
 
 }
-
-
+<br />
 <div>
-    @Html.ActionLink("View transactions assigned to you", "TransactionList") | @Html.ActionLink("View Files", "FileList")
+    @Html.ActionLink("Manage Employees", "EmployeeList")
 </div>
 
 @section Scripts {

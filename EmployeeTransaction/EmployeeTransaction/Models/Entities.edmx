@@ -71,9 +71,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="LastStatusUpdate" Type="nvarchar" MaxLength="512" />
           <Property Name="Name" Type="nvarchar" MaxLength="128" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="32" />
-          <Property Name="Address" Type="nvarchar" MaxLength="128" />
+          <Property Name="ToWhom" Type="nvarchar" MaxLength="128" />
+          <Property Name="Financial" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Files">
           <Key>
@@ -284,9 +286,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="LastStatusUpdate" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ToWhom" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Financial" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="File">
           <Key>
@@ -466,9 +470,11 @@
             <EntityTypeMapping TypeName="Model.Company">
               <MappingFragment StoreEntitySet="Companies">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LastStatusUpdate" ColumnName="LastStatusUpdate" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ToWhom" ColumnName="ToWhom" />
+                <ScalarProperty Name="Financial" ColumnName="Financial" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

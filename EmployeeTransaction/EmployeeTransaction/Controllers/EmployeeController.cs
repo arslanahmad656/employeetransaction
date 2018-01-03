@@ -26,11 +26,13 @@ namespace EmployeeTransaction.Controllers
 
         public ActionResult CompanyDetails()
         {
+            ViewBag.Role = "Employee";
             return View(db.Companies.First());
         }
 
         public ActionResult EditCompany()
         {
+            ViewBag.Role = "Employee";
             var userId = User.Identity.GetUserId();
             var transactions = db.TransactionUsers.Where(t => t.UserId.Equals(userId, StringComparison.OrdinalIgnoreCase)).Select(t => t.Transaction.code).ToList();
             ViewBag.CanCreate = transactions.Contains(2);
@@ -80,7 +82,7 @@ namespace EmployeeTransaction.Controllers
             {
                 if(file != null && file.ContentLength > 0)
                 {
-                    var imgName = Guid.NewGuid();
+                    var imgName = file.FileName;
                     var serverPath = Server.MapPath("~/App_Data/Files");
                     var fullPath = Path.Combine(serverPath, imgName + Path.GetExtension(file.FileName));
                     file.SaveAs(fullPath);

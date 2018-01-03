@@ -309,10 +309,12 @@
     <Content Include="Views\Manager\EmployeeDetails.cshtml" />
     <Content Include="Views\Manager\ManageTransactions.cshtml" />
     <Content Include="Views\Employee\CompanyDetails.cshtml" />
-    <Content Include="Views\Employee\EditCompany.cshtml" />
     <Content Include="Views\Employee\TransactionList.cshtml" />
     <Content Include="Views\Employee\FileList.cshtml" />
     <Content Include="Views\Employee\CreateFiles.cshtml" />
+    <Content Include="Views\Admin\EditCompany.cshtml" />
+    <Content Include="Views\Manager\EditCompany.cshtml" />
+    <Content Include="Views\Employee\EditCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Files\" />

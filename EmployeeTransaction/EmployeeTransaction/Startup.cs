@@ -98,9 +98,11 @@ namespace EmployeeTransaction
                 // dummy company
                 db.Companies.Add(new Company
                 {
-                    Address = "Company Address",
-                    Name = "Company Name",
-                    PhoneNumber = "03084063662"
+                    Date = DateTime.Now,
+                    Financial = 18000.25M,
+                    LastStatusUpdate = "Last Status",
+                    Name = "Company",
+                    ToWhom = "To someone"
                 });
 
                 // Transactions
