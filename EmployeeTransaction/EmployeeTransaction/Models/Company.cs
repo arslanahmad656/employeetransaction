@@ -15,10 +15,15 @@ namespace EmployeeTransaction.Models
     public partial class Company
     {
         public int Id { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string LastStatusUpdate { get; set; }
-        public string Name { get; set; }
+        public string CompanyName { get; set; }
+        public string State { get; set; }
+        public string Proposal { get; set; }
+        public string Financial { get; set; }
         public string ToWhom { get; set; }
-        public Nullable<decimal> Financial { get; set; }
+        public string Words { get; set; }
+        public string Name { get; set; }
+        public string Status { get; set; }
+        public Nullable<System.DateTime> Date1 { get; set; }
+        public Nullable<System.DateTime> Date2 { get; set; }
     }
 }

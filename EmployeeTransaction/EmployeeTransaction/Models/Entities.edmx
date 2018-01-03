@@ -66,16 +66,21 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="Companies">
+        <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="datetime" />
-          <Property Name="LastStatusUpdate" Type="nvarchar" MaxLength="512" />
-          <Property Name="Name" Type="nvarchar" MaxLength="128" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="128" />
+          <Property Name="State" Type="nvarchar" MaxLength="128" />
+          <Property Name="Proposal" Type="nvarchar" MaxLength="128" />
+          <Property Name="Financial" Type="nvarchar" MaxLength="128" />
           <Property Name="ToWhom" Type="nvarchar" MaxLength="128" />
-          <Property Name="Financial" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Words" Type="nvarchar" MaxLength="128" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status" Type="nvarchar" MaxLength="128" />
+          <Property Name="Date1" Type="datetime" />
+          <Property Name="Date2" Type="datetime" />
         </EntityType>
         <EntityType Name="Files">
           <Key>
@@ -187,7 +192,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionUser" EntityType="Self.TransactionUser" Schema="dbo" store:Type="Tables" />
@@ -286,11 +291,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="LastStatusUpdate" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Proposal" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Financial" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ToWhom" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Financial" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Words" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Date1" Type="DateTime" Precision="3" />
+          <Property Name="Date2" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="File">
           <Key>
@@ -468,13 +478,18 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="Model.Company">
-              <MappingFragment StoreEntitySet="Companies">
+              <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="LastStatusUpdate" ColumnName="LastStatusUpdate" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ToWhom" ColumnName="ToWhom" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Proposal" ColumnName="Proposal" />
                 <ScalarProperty Name="Financial" ColumnName="Financial" />
+                <ScalarProperty Name="ToWhom" ColumnName="ToWhom" />
+                <ScalarProperty Name="Words" ColumnName="Words" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date1" ColumnName="Date1" />
+                <ScalarProperty Name="Date2" ColumnName="Date2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

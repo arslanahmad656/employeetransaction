@@ -19,29 +19,13 @@ namespace EmployeeTransaction.Controllers
         // GET: Manager
         public ActionResult Index()
         {
-            return RedirectToAction("EditCompany");
+            return RedirectToAction("CompanyDetails");
         }
 
-        public ActionResult EditCompany()
+        public ActionResult CompanyDetails()
         {
-            ViewBag.Role = "Manager"; // Since it's in manager controller, it's always the manager role
+            ViewBag.Role = "Manager";
             return View(db.Companies.First());
-        }
-
-        [HttpPost]
-        public ActionResult EditCompany(Company model)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Please fill in the fields properly");
-                return View(model);
-            }
         }
 
         public ActionResult EmployeeList()

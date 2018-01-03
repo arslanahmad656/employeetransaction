@@ -98,11 +98,16 @@ namespace EmployeeTransaction
                 // dummy company
                 db.Companies.Add(new Company
                 {
-                    Date = DateTime.Now,
-                    Financial = 18000.25M,
-                    LastStatusUpdate = "Last Status",
-                    Name = "Company",
-                    ToWhom = "To someone"
+                    CompanyName = "Company Name",
+                    Date1 = DateTime.Now,
+                    Date2 = DateTime.Now.Subtract(new TimeSpan(200, 0, 0, 0, 0)),
+                    Financial = "My finance",
+                    Name = "Name",
+                    Proposal = "Proposal",
+                    State = "State",
+                    Status = "Editable",
+                    ToWhom = "Someone",
+                    Words = "word"
                 });
 
                 // Transactions

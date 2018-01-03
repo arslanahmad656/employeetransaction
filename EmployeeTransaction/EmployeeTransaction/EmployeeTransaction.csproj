@@ -254,6 +254,7 @@
     <Content Include="Models\Entities.edmx.diagram">
       <DependentUpon>Entities.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Desktop.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -312,8 +313,8 @@
     <Content Include="Views\Employee\TransactionList.cshtml" />
     <Content Include="Views\Employee\FileList.cshtml" />
     <Content Include="Views\Employee\CreateFiles.cshtml" />
-    <Content Include="Views\Admin\EditCompany.cshtml" />
-    <Content Include="Views\Manager\EditCompany.cshtml" />
+    <Content Include="Views\Admin\CompanyDetails.cshtml" />
+    <Content Include="Views\Manager\CompanyDetails.cshtml" />
     <Content Include="Views\Employee\EditCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>

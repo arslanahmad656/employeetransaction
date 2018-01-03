@@ -1,10 +1,10 @@
 ﻿@model EmployeeTransaction.Models.Company
 
 @{
-    ViewBag.Title = "CompanyDetails";
+    ViewBag.Title = "Edit Company";
 }
 
-<h2>Company Details</h2>
+<h2>Edit Company</h2>
 
 
 <table class="table table-striped table-bordered">
@@ -67,8 +67,11 @@
         </tr>
     </tfoot>
 </table>
-
-
+<br />
 <div>
-    @Html.ActionLink("View transactions assigned to you", "TransactionList") | @Html.ActionLink("View Files", "FileList")
+    @Html.ActionLink("Manage Employees", "EmployeeList")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
