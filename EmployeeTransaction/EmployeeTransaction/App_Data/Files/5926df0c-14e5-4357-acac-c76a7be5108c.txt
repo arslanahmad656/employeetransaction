@@ -1,0 +1,49 @@
+E = false(500,500);
+m = 3; c = 7;
+x = unique(round(1+499*rand(1,200)));
+y = m*x+c + 5*rand(size(x));
+x = round(x); y = round(y);
+x = [x 400];
+y = [y 40];
+for i = 1:length(x)
+    if(y(i)>0 && y(i)<=500)
+        E(x(i),y(i)) = true;
+    end
+end
+%imshow(E);
+[X Y] = find(E==true);
+n = length(X);
+th = 3;
+bestM = 0; bestC = 0; bestScore = 0;
+for i = 1:10
+    idx = round(1+(n-1)*rand);
+    x1 = X(idx); y1 = Y(idx);
+    idx = round(1+(n-1)*rand);
+    x2 = X(idx); y2 = Y(idx);
+    mc = inv([x1 1;x2 1])*[y1;y2];
+    m = mc(1); c = mc(2);
+    score = 0;
+    for j = 1:n
+       d = abs(m*X(j)-Y(j)+c)/sqrt(m^2+1); 
+       if d<=th
+           score = score+1;
+       end
+    end
+    if score > bestScore
+       bestM = m; bestC = c; bestScore = score; 
+    end
+end
+
+disp([bestM bestC]);
+
+% A = [X ones(size(X))]; b = Y;
+% mc = inv(A'*A)*A'*b;
+% m_dash = mc(1); c_dash = mc(2);
+% disp([m_dash c_dash]);
+
+
+
+
+
+
+

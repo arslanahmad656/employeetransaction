@@ -1,0 +1,40 @@
+﻿@model IEnumerable<EmployeeTransaction.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transaction List";
+}
+
+<h2>Transactions assigned to you</h2>
+
+@if(Model.Count() == 0)
+{
+    <h3>No transactions have been assigned to you</h3>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@Html.ActionLink("Back", "Index")

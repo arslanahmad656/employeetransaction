@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EmployeeTransaction.Models.File>
+
+@{
+    ViewBag.Title = "FileList";
+}
+
+<h2>FileList</h2>
+
+<p>
+    @if ((bool)ViewBag.CanCreate)
+    {
+        @Html.ActionLink("Create New File", "CreateFiles")
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+    </tr>
+}
+
+</table>

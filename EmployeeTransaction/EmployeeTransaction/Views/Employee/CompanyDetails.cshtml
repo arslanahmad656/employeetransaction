@@ -1,0 +1,41 @@
+﻿@model EmployeeTransaction.Models.Company
+
+@{
+    ViewBag.Title = "CompanyDetails";
+}
+
+<h2>CompanyDetails</h2>
+
+<div>
+    <h4>Company</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("View transactions assigned to you", "TransactionList") | @Html.ActionLink("View Files", "FileList")
+</div>

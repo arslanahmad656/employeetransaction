@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Add Files";
+}
+
+<h2>Upload File/s</h2>
+
+@using (Html.BeginForm("SaveFiles", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <label for="files">Select File/s</label> <input type="file" multiple class="btn btn-primary" name="files" />
+    <br />
+    <input class="btn btn-default" type="submit" />
+}
+
+@Html.ActionLink("Back", "Index")

@@ -1,0 +1,67 @@
+﻿@model EmployeeTransaction.Models.AspNetUser
+
+@{
+    ViewBag.Title = "EmployeeDetails";
+}
+
+<h2>Employee Details</h2>
+
+<div>
+    <h4>AspNetUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            Assigned Transactions
+        </dt>
+
+        <dd>
+            @{ 
+                var transactions = (List<EmployeeTransaction.Models.Transaction>)ViewBag.Transactions;
+            }
+            @if(transactions.Count == 0)
+            {
+                <p>
+                    No transactions are assigned to this employee
+                </p>
+            }
+            else
+            {
+                <ul>
+                    @foreach (var item in transactions)
+                    {
+                        <li>@item.Name</li>
+                    }
+                </ul>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Manage Transactions", "ManageTransactions", new { id = Model.Id })
+</p>
