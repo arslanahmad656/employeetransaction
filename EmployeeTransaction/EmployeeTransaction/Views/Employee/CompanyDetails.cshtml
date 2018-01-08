@@ -1,4 +1,4 @@
-﻿@model EmployeeTransaction.Models.Company
+﻿@model List<EmployeeTransaction.Models.Company>
 
 @{
     ViewBag.Title = "CompanyDetails";
@@ -7,66 +7,76 @@
 <h2>Company Details</h2>
 
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Company Name</th>
-            <th>Date 1</th>
-            <th>Date 2</th>
-            <th>Financial</th>
-            <th>Name</th>
-            <th>Proposal</th>
-            <th>State</th>
-            <th>Status</th>
-            <th>To Whom</th>
-            <th>Words</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="text-center">
-            <td>
-                @Html.DisplayFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Date1, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Date2, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Financial, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Proposal, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.ToWhom, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Words, new { htmlAttributes = new { @class = "form-control" } })
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            @for (var i = 0; i < 10; ++i)
+@if(Model.Count == 0)
+{
+    <h4 class="text-warning">No companies are assigned to this employee</h4>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Date 1</th>
+                <th>Date 2</th>
+                <th>Financial</th>
+                <th>Name</th>
+                <th>Proposal</th>
+                <th>State</th>
+                <th>Status</th>
+                <th>To Whom</th>
+                <th>Words</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in Model)
             {
-                <td class="text-center">
-                    @((string)ViewBag.Role)
-                </td>
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(model => company.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.Date1, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.Date2, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.Financial, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.Proposal, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.State, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.ToWhom, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => company.Words, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
             }
-        </tr>
-    </tfoot>
-</table>
+        </tbody>
+        <tfoot>
+            <tr>
+                @for (var i = 0; i < 10; ++i)
+                {
+                    <td class="text-center">
+                        @((string)ViewBag.Role)
+                    </td>
+                }
+            </tr>
+        </tfoot>
+    </table>
+}
 
 
 <div>

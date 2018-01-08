@@ -82,6 +82,14 @@
           <Property Name="Date1" Type="datetime" />
           <Property Name="Date2" Type="datetime" />
         </EntityType>
+        <EntityType Name="EmployeeCompany">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Files">
           <Key>
             <PropertyRef Name="Id" />
@@ -161,6 +169,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmployeeCompany_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="EmployeeCompany" Type="Self.EmployeeCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeCompany">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeCompany_Employee">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="EmployeeCompany" Type="Self.EmployeeCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeCompany">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransactionUser_TransactionId">
           <End Role="Transactions" Type="Self.Transactions" Multiplicity="1" />
           <End Role="TransactionUser" Type="Self.TransactionUser" Multiplicity="*" />
@@ -193,6 +225,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeCompany" EntityType="Self.EmployeeCompany" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionUser" EntityType="Self.TransactionUser" Schema="dbo" store:Type="Tables" />
@@ -211,6 +244,14 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeCompany_Company" Association="Self.FK_EmployeeCompany_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="EmployeeCompany" EntitySet="EmployeeCompany" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeCompany_Employee" Association="Self.FK_EmployeeCompany_Employee">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="EmployeeCompany" EntitySet="EmployeeCompany" />
           </AssociationSet>
           <AssociationSet Name="FK_TransactionUser_TransactionId" Association="Self.FK_TransactionUser_TransactionId">
             <End Role="Transactions" EntitySet="Transactions" />
@@ -283,6 +324,7 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="EmployeeCompanies" Relationship="Self.FK_EmployeeCompany_Employee" FromRole="AspNetUsers" ToRole="EmployeeCompany" />
           <NavigationProperty Name="TransactionUsers" Relationship="Self.FK_TransactionUser_User" FromRole="AspNetUsers" ToRole="TransactionUser" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
@@ -301,6 +343,17 @@
           <Property Name="Status" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Date1" Type="DateTime" Precision="3" />
           <Property Name="Date2" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmployeeCompanies" Relationship="Self.FK_EmployeeCompany_Company" FromRole="Company" ToRole="EmployeeCompany" />
+        </EntityType>
+        <EntityType Name="EmployeeCompany">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_EmployeeCompany_Employee" FromRole="EmployeeCompany" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_EmployeeCompany_Company" FromRole="EmployeeCompany" ToRole="Company" />
         </EntityType>
         <EntityType Name="File">
           <Key>
@@ -356,6 +409,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmployeeCompany_Employee">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="EmployeeCompany" Type="Self.EmployeeCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeCompany">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransactionUser_User">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
           <End Role="TransactionUser" Type="Self.TransactionUser" Multiplicity="*" />
@@ -365,6 +430,18 @@
             </Principal>
             <Dependent Role="TransactionUser">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeCompany_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="EmployeeCompany" Type="Self.EmployeeCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeCompany">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -391,6 +468,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="EmployeeCompanies" EntityType="Self.EmployeeCompany" />
           <EntitySet Name="Files" EntityType="Self.File" />
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="TransactionUsers" EntityType="Self.TransactionUser" />
@@ -402,9 +480,17 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_EmployeeCompany_Employee" Association="Self.FK_EmployeeCompany_Employee">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="EmployeeCompany" EntitySet="EmployeeCompanies" />
+          </AssociationSet>
           <AssociationSet Name="FK_TransactionUser_User" Association="Self.FK_TransactionUser_User">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="TransactionUser" EntitySet="TransactionUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeCompany_Company" Association="Self.FK_EmployeeCompany_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="EmployeeCompany" EntitySet="EmployeeCompanies" />
           </AssociationSet>
           <AssociationSet Name="FK_TransactionUser_TransactionId" Association="Self.FK_TransactionUser_TransactionId">
             <End Role="Transactions" EntitySet="Transactions" />
@@ -493,6 +579,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeCompanies">
+            <EntityTypeMapping TypeName="Model.EmployeeCompany">
+              <MappingFragment StoreEntitySet="EmployeeCompany">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Files">
             <EntityTypeMapping TypeName="Model.File">
               <MappingFragment StoreEntitySet="Files">
@@ -535,7 +630,7 @@
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="CopyToOutputDirectory" />
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
       </DesignerInfoPropertySet>
     </Connection>
     <Options>

@@ -197,6 +197,9 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeCompany.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -316,6 +319,12 @@
     <Content Include="Views\Admin\CompanyDetails.cshtml" />
     <Content Include="Views\Manager\CompanyDetails.cshtml" />
     <Content Include="Views\Employee\EditCompany.cshtml" />
+    <Content Include="Views\Admin\AddCompany.cshtml" />
+    <Content Include="Views\Admin\ViewCompanyAssignment.cshtml" />
+    <Content Include="Views\Admin\EditCompanyAssignment.cshtml" />
+    <Content Include="Views\Manager\AddCompany.cshtml" />
+    <Content Include="Views\Manager\ViewCompanyAssignment.cshtml" />
+    <Content Include="Views\Manager\EditCompanyAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Files\" />

@@ -1,0 +1,28 @@
+﻿@model List<EmployeeTransaction.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "ViewCompanyAssignment";
+    var companyId = (int)ViewBag.CompanyId;
+}
+
+<h2>Company: @((string)ViewBag.CompanyName)</h2>
+<hr />
+
+@if(Model.Count == 0)
+{
+    <h4 class="text-warning">This company is not associated with any employee</h4>
+}
+else
+{
+    <h4>This company is associated with the following employees</h4>
+    <ul>
+        @foreach (var employee in Model)
+        {
+            <li>@employee.UserName</li>
+        }
+    </ul>
+}
+
+<hr />
+
+@Html.ActionLink("Edit Assignments", "EditCompanyAssignment", new { id = companyId }, new { @class = "btn btn-default" })

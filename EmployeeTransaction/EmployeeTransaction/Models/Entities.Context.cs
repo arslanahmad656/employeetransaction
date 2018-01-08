@@ -31,6 +31,7 @@ namespace EmployeeTransaction.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<EmployeeCompany> EmployeeCompanies { get; set; }
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<TransactionUser> TransactionUsers { get; set; }

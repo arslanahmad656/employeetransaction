@@ -1,0 +1,35 @@
+﻿@{ 
+    var employeeSelectList = (List<SelectListItem>)ViewBag.EmployeesSelect;
+    var companyName = (string)ViewBag.CompanyName;
+    var companyId = (int)ViewBag.CompanyId;
+}
+
+@{
+    ViewBag.Title = "EditCompanyAssignment";
+}
+
+<h2>Edit Company Assignments</h2>
+
+<hr />
+
+<h4>Select the employees to whom you want to assign this company</h4>
+
+<form method="post" action="@Url.Action("SaveCompanyAssignments")">
+    @Html.Hidden("company_id", companyId)
+    @Html.ListBox("employees", employeeSelectList, new { @class = "form-control" })
+    <br />
+    <input type="submit" class="btn btn-default" value="Save" />
+    <button type="button" class="btn btn-danger" onclick="clearemployees()">Clear</button>
+</form>
+
+@section Scripts{
+
+    <script>
+        function clearemployees() {
+            $('#employees').find("option").each(function () {
+                $(this).removeAttr('selected');
+            })
+        }
+    </script>
+
+}

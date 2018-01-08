@@ -27,32 +27,48 @@ namespace EmployeeTransaction.Controllers
         public ActionResult CompanyDetails()
         {
             ViewBag.Role = "Employee";
-            return View(db.Companies.First());
+            var userId = User.Identity.GetUserId();
+            var companies = db.EmployeeCompanies.Where(ec => ec.EmployeeId.Equals(userId, StringComparison.OrdinalIgnoreCase)).Select(ec => ec.Company).ToList();
+            return View(companies);
         }
 
         public ActionResult EditCompany()
         {
             ViewBag.Role = "Employee";
             var userId = User.Identity.GetUserId();
+            var companies = db.EmployeeCompanies.Where(ec => ec.EmployeeId.Equals(userId, StringComparison.OrdinalIgnoreCase)).Select(ec => ec.Company).ToList();
             var transactions = db.TransactionUsers.Where(t => t.UserId.Equals(userId, StringComparison.OrdinalIgnoreCase)).Select(t => t.Transaction.code).ToList();
             ViewBag.CanCreate = transactions.Contains(2);
-            return View(db.Companies.First());
+            return View(companies);
         }
 
-        [HttpPost]
-        public ActionResult EditCompany(Company model)
+        //[HttpPost]
+        //public ActionResult EditCompany(Company model)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("", "Please fill in the fields properly");
+        //        return View(model);
+        //    }
+        //}
+
+        public ActionResult EditCompanySingle(int companyId, string status)
         {
-            if(ModelState.IsValid)
+            var company = db.Companies.Find(companyId);
+            if(company == null)
             {
-                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpNotFoundResult("No company found with the specified id");
             }
-            else
-            {
-                ModelState.AddModelError("", "Please fill in the fields properly");
-                return View(model);
-            }
+            company.Status = status;
+            db.Entry(company).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public ActionResult TransactionList()

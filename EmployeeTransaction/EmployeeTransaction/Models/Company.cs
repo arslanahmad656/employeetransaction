@@ -14,6 +14,12 @@ namespace EmployeeTransaction.Models
     
     public partial class Company
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Company()
+        {
+            this.EmployeeCompanies = new HashSet<EmployeeCompany>();
+        }
+    
         public int Id { get; set; }
         public string CompanyName { get; set; }
         public string State { get; set; }
@@ -25,5 +31,8 @@ namespace EmployeeTransaction.Models
         public string Status { get; set; }
         public Nullable<System.DateTime> Date1 { get; set; }
         public Nullable<System.DateTime> Date2 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeCompany> EmployeeCompanies { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace EmployeeTransaction.Controllers
         public ActionResult CompanyDetails()
         {
             ViewBag.Role = "Admin";
-            return View(db.Companies.First());
+            return View(db.Companies.ToList());
         }
 
         //public ActionResult EditCompany()
@@ -158,6 +158,93 @@ namespace EmployeeTransaction.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("EmployeeDetails", new { id = userId });
+        }
+
+        public ActionResult AddCompany()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddCompany(Company model)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Companies.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("CompanyDetails");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill in all the fields properly.");
+                return View(model);
+            }
+        }
+
+        public ActionResult ViewCompanyAssignment(int id)
+        {
+            var company = db.Companies.Find(id);
+            if(company == null)
+            {
+                return new HttpNotFoundResult("Company with specified id not found");
+            }
+            var employees = db.EmployeeCompanies.Where(ec => ec.CompanyId == company.Id).Select(ec => ec.AspNetUser).ToList();
+            ViewBag.CompanyName = company.CompanyName;
+            ViewBag.CompanyId = company.Id;
+            return View(employees);
+        }
+
+        public ActionResult EditCompanyAssignment(int id)
+        {
+            var company = db.Companies.Find(id);
+            if(company == null)
+            {
+                return new HttpNotFoundResult("Company with specified id not found");
+            }
+            var employeesWithCompany = db.EmployeeCompanies.Where(ec => ec.CompanyId == company.Id).Select(ec => ec.AspNetUser.Id).ToList();
+
+            var employeeRoleId = db.AspNetRoles.Where(role => role.Name.Equals("employee", StringComparison.OrdinalIgnoreCase)).Single().Id;
+            var allEmployees = context.Users
+                .Where(user => user.Roles
+                    .Select(role => role.RoleId)
+                    .Contains(employeeRoleId))
+                .Select(e => new SelectListItem
+                {
+                    Text = e.UserName,
+                    Value = e.Id,
+                    Selected = employeesWithCompany.Contains(e.Id)
+                })
+                .ToList();
+
+            ViewBag.EmployeesSelect = allEmployees;
+            ViewBag.CompanyName = company.CompanyName;
+            ViewBag.CompanyId = company.Id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SaveCompanyAssignments()
+        {
+            var companyId = Convert.ToInt32(Request.Form["company_id"]);
+            db.EmployeeCompanies
+                .Where(ec => ec.CompanyId == companyId)
+                .ToList()
+                .ForEach(ec => db.Entry(ec).State = System.Data.Entity.EntityState.Deleted);
+            db.SaveChanges();
+            try
+            {
+                var newEmployees = Request.Form["employees"].Split(',').ToList();
+                newEmployees.ForEach(e => db.EmployeeCompanies.Add(new EmployeeCompany
+                {
+                    CompanyId = companyId,
+                    EmployeeId = e
+                }));
+                db.SaveChanges();
+            }
+            catch (NullReferenceException)
+            {   
+            }
+            return RedirectToAction("ViewCompanyAssignment", new { id = companyId });
         }
 
         private string GetCurrentManager()

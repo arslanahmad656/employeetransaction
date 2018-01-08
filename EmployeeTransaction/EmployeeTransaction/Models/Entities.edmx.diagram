@@ -4,19 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2df033c013784ae698caf98b92ffbeb1" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="7.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="8.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Transaction" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TransactionUser" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+      <Diagram DiagramId="74b160042d93440396337850a7f8c5e4" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmployeeCompany" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Transaction" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TransactionUser" Width="1.5" PointX="8.25" PointY="2.375" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmployeeCompany_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_TransactionUser_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmployeeCompany_Company" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_TransactionUser_TransactionId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
